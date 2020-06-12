@@ -1,0 +1,56 @@
+<div class="row justify-content-center md-3">
+    <div class="col-md-4 text-center">
+        <h1>To-Do's</h1>
+        <p style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:#0A1172; font-size: 20px;">
+            ကြိုးစားခြင်းသည် အောင်မြင်ခြင်း၏ သော့ချက် ဖြစ်၏။
+            <br>😊 ဒီနေ့ ... သင်လုပ်နိုင်ပါတယ်။ 😊
+        </p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form #fo="ngForm" (ngSubmit)=' fo.form.valid && onSubmit(fo)' class="form-inline">
+            <div class="col-md-10 form-group">
+                <input type="text" placeholder="Add New Todos here" name="todoText"
+                    class=" form-control-plaintext drop-shadow" [(ngModel)] = 'todoValue' required #todo = 'ngModel' [ngClass] = "{ 'border-danger': fo.submitted && todo.invalid }">
+            </div>
+            <button type="submit" class="btn btn-primary col-md-2 btn-todo btn-block drop-shadow"> {{ dataStatus }} </button>
+
+            <div class="text-danger ml-3" *ngIf = 'fo.submitted && todo.invalid && todo.errors.required'> 
+                Category is Required ..
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row justify-content-center todo-list">
+    <div class="col-md-6 ">
+        <div class="card" *ngFor = 'let todo of todos'>
+            <div class="card-body">
+                <div class="clearfix">
+                    <div class="float-left text-secondary">
+                        <i class="far fa-circle text-danger" *ngIf = '!todo.data.isCompleted'></i>
+                        <i class="fas fa-check text-success" *ngIf = 'todo.data.isCompleted'></i>
+                       {{ todo.data.todo }} 
+                       <hr *ngIf= 'todo.data.isCompleted'>
+                    </div>
+
+                    <div class="float-right">
+                        <i class="far fa-check-circle text-success" (click) = 'completeTodo(todo.id)' *ngIf = '!todo.data.isCompleted'></i>
+                        <i class="far fa-times-circle text-danger" (click) = 'uncompleteTodo(todo.id)' *ngIf = 'todo.data.isCompleted'></i>
+                        <div class="todo-tools">
+                            <small>
+                                <i class="fas fa-pencil-alt text-warning" (click) = 'onEdit(todo.data.todo, todo.id)' ></i>
+                                <i class="fas fa-trash text-danger" (click) = 'onDelete(todo.id)'></i>
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

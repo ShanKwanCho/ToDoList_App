@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "todolist-ssdk22": {
+      "hosting": {
+        "todo": [
+          "todolist-ssdk22"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "todolist-ssdk22"
+  }
+}
